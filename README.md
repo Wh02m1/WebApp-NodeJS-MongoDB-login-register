@@ -1,6 +1,6 @@
 # Node.js Web App with Login, Register, and Contact Us Form
 
-This is a web application built using Node.js, MongoDB, and Express.js. It features user authentication with login and registration functionality, along with a contact form for users to send messages.
+This is a web application built using **Node.js**, **MongoDB**, and **Express.js**. It features user authentication with login and registration functionality, along with a contact form for users to send messages.
 
 ## Prerequisites
 
