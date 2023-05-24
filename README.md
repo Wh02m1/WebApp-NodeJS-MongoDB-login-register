@@ -19,6 +19,25 @@ Before running this application, make sure you have the following installed:
   ``` 
 4. Set up the MongoDB connection by replacing the MongoDB URL in `App.js` with your own database URL.
 
+## Database Setup
+
+1. Create a MongoDB database for the application.
+2. Define the required schemas in your MongoDB database based on the following models used in the application:
+- User Schema:
+  - Username (String)
+  - Email (String)
+  - Password (String)
+
+- Product Schema:
+  - Define the fields based on your specific product requirements.
+
+- Ticket Schema:
+  - Name (String)
+  - Email (String)
+  - Message (String)
+
+Ensure that the database and collection names used in the application match the ones you have set up in your MongoDB database.
+
 ## Usage
 
 1. Start the application by running the following command:
