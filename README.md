@@ -17,6 +17,9 @@ Before running this application, make sure you have the following installed:
   ```bash
   npm install
   ``` 
+  ```bash
+  npm init
+  ``` 
 4. Set up the MongoDB connection by replacing the MongoDB URL in `App.js` with your own database URL.
 
 ## Database Setup
