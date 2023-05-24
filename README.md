@@ -18,6 +18,9 @@ Before running this application, make sure you have the following installed:
   npm install
   ``` 
   ```bash
+  npm init
+  ``` 
+  ```bash
   npm install passport
   npm install express
   npm install mongoose
