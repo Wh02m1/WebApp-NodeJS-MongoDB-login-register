@@ -17,6 +17,12 @@ Before running this application, make sure you have the following installed:
   ```bash
   npm install
   ``` 
+    ```bash
+  npm install express
+  ```
+     ```bash
+  npm install mongoose
+  ```
   ```bash
   npm init
   ``` 
