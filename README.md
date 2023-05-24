@@ -28,6 +28,7 @@ Before running this application, make sure you have the following installed:
   npm install passport-local
   npm install passport-local-mongoose
   npm install express-session
+  npm install ejs
 
   ```
 4. Set up the MongoDB connection by replacing the MongoDB URL in `App.js` with your own database URL.
