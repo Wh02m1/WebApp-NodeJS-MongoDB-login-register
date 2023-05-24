@@ -17,10 +17,10 @@ Before running this application, make sure you have the following installed:
   ```bash
   npm install
   ``` 
-    ```bash
+  ```bash
   npm install express
   ```
-     ```bash
+  ```bash
   npm install mongoose
   ```
   ```bash
