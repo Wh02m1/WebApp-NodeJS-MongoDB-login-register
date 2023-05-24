@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>User Management</title>
+  <style>
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      color: #333;
+    }
+
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    /* Media Query for Small Screens */
+    @media only screen and (max-width: 600px) {
+      h1 {
+        margin-top: 20px;
+        font-size: 24px;
+      }
+      
+      input[type="text"] {
+        max-width: 100%;
+      }
+      
+      button {
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Delete User Section -->
+  <h1>Delete User <%= Email %> ?</h1>
+  <form>
+    <label for="inputEmail">Enter Email To Confirm:</label>
+    <input type="text" id="inputEmail" name="inputEmail">
+    <button type="button" onclick="deleteUser()">Confirm Delete</button>
+  </form>
+
+  <!-- Update Email Section -->
+  <h1>Update User Email</h1>
+  <form>
+    <label for="inputNewEmail">Enter New Email:</label>
+    <input type="text" id="inputNewEmail" name="inputNewEmail">
+    <button type="button" onclick="updateEmail()">Update Email</button>
+  </form>
+
+  <script>
+    function deleteUser() {
+      var inputEmail = document.getElementById('inputEmail').value;
+      var email = "<%= Email %>";
+
+      if (inputEmail === email) {
+        fetch(`/users/${email}`, {
+          method: 'DELETE'
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.message); // User deleted successfully
+            // Handle any other actions or UI updates after successful deletion
+            alert("User deleted successfully");
+            // Redirect to another page or update UI as needed
+            window.location.replace("/login");   // Redirect to the login page
+          })
+          .catch(error => {
+            console.error(error);
+            // Handle error case
+            alert("Error deleting user");
+            // Display an error message or perform appropriate actions
+          });
+      } else {
+        alert('Email does not match!');
+        // Additional logic or actions for a non-matching email
+      }
+    }
+
+    function updateEmail() {
+              var inputNewEmail = document.getElementById('inputNewEmail').value;
+              var oldEmail = "<%= Email %>"; // Replace "<%= Email %>" with the actual old email value
+
+              fetch(`/userss/${oldEmail}/${inputNewEmail}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  newEmail: inputNewEmail
+                })
+              })
+                .then(response => response.json())
+                .then(data => {
+                  console.log(data.message); // User email updated successfully
+                  // Handle any other actions or UI updates after successful email update
+                  alert("User email updated successfully");
+                  // Redirect to another page or update UI as needed
+                  window.location.replace("/home"); // Redirect to the login page
+                })
+                .catch(error => {
+                  console.error(error);
+                  // Handle error case
+                  alert("Error updating user email");
+                  // Display an error message or perform appropriate actions
+                });
+            }
+
+
+
+  </script>
+</body>
+</html>

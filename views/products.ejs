@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+  </head>
+  <body>
+    <h1>Our Products</h1>
+
+    <!-- Display all products -->
+    <ul class="products">
+      <% products.forEach(function(product) { %>
+        <li>
+          <div class="product-item">
+            <img src="<%= product.img %>" alt="<%= product.name %>" class="product-image">
+            <h2 class="product-title"><%= product.name %></h2>
+            <p class="product-price">$<%= product.price %></p>
+            <button class="add-to-cart-btn">Add to cart</button>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+
+    <div class="shopping-cart">
+      <h2>Your Shopping Cart</h2>
+      <ul class="cart-items"></ul>
+      <p class="cart-total">Total: $0</p>
+    </div>
+    <button class="add-to-cart-btn" onclick="redirectToCheckout()">Checkout</button>
+
+
+  </body>
+  <style>
+    ul.products {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .products li {
+      flex-basis: 33.33%; /* Display 3 products per line */
+    }
+  
+    .product-item {
+      width: 100%;
+      margin: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+  
+    .product-image {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
+  
+    .product-title {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  
+    .product-price {
+      font-size: 16px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+  
+    .add-to-cart-btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    .add-to-cart-btn:hover {
+      background-color: #0069d9;
+    }
+  
+    .shopping-cart {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  
+    .cart-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+  
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin-right: 10px;
+    }
+  
+    .cart-total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+<script>
+  // Define variables to reference the products and cart items
+  const products = document.querySelectorAll(".product-item");
+  const cartItems = document.querySelector(".cart-items");
+  const cartTotal = document.querySelector(".cart-total");
+
+  // Define an empty array to store the cart items
+  let cart = [];
+
+  // Add an event listener to each "Add to cart" button
+  products.forEach(function(product) {
+    const button = product.querySelector(".add-to-cart-btn");
+    button.addEventListener("click", addToCart);
+  });
+
+  // Function to add a product to the shopping cart
+  function addToCart(event) {
+    // Get the product details from the DOM
+    const product = event.target.closest(".product-item");
+    const imgSrc = product.querySelector(".product-image").src;
+    const name = product.querySelector(".product-title").textContent;
+    const price = product.querySelector(".product-price").textContent.slice(1);
+
+    // Create a new cart item object
+    const cartItem = {
+      imgSrc,
+      name,
+      price,
+      quantity: 1
+    };
+
+    // Check if the item is already in the cart
+    const existingCartItem = cart.find(item => item.name === name);
+    if (existingCartItem) {
+      // Increment the quantity of the existing item
+      existingCartItem.quantity += 1;
+    } else {
+      // Add the new item to the cart
+      cart.push(cartItem);
+    }
+
+    // Update the cart UI
+    updateCart();
+  }
+
+  // Function to update the cart UI
+  function updateCart() {
+    // Clear the existing cart items
+    cartItems.innerHTML = "";
+
+    // Add each cart item to the UI
+    cart.forEach(function(item) {
+      const li = document.createElement("li");
+      li.classList.add("cart-item");
+      li.innerHTML = `
+        <img src="${item.imgSrc}" alt="${item.name}">
+        <span>${item.name}</span>
+        <span>$${item.price} x ${item.quantity}</span>
+      `;
+      cartItems.appendChild(li);
+    });
+
+    // Update the cart total
+    const cartTotalValue = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    cartTotal.textContent = `Total: $${cartTotalValue.toFixed(2)}`;
+  }
+
+   // Add an event listener to the "Checkout" button
+   const checkoutBtn = document.querySelector(".checkout-btn");
+    checkoutBtn.addEventListener("click", redirectToCheckoutPage);
+
+    function redirectToCheckout() {
+    window.location.href = "/checkout";
+  }
+</script>
+
+</html>

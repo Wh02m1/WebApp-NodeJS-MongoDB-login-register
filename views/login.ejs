@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <title>login</title>
+
+    <script>
+
+    function validateForm1() {
+        
+        let x = document.forms["myFormLogin"]["email"].value;
+        let y = document.forms["myFormLogin"]["password"].value;
+        if(x=="" && y==""){
+            alert("Email and Password must be filled out");
+            window.location.href ="http://localhost:3000/";
+
+            return false;
+            
+        }
+        else if (x == "" && y!="") {
+            alert("Email must be filled out");
+            window.location.href ="http://localhost:3000/";
+
+            return false;
+        }
+        else if(y=="" && x!=""){
+            alert("Password must be filled out");
+            window.location.href ="http://localhost:3000/";
+
+            return false;
+        }
+        return true;
+  
+    }
+
+    function validateForm2() {
+  let u = document.forms["myFormRegister"]["username"].value;
+  let x = document.forms["myFormRegister"]["email"].value;
+  let y = document.forms["myFormRegister"]["password"].value;
+  let z = document.forms["myFormRegister"]["cf-password"].value;
+
+  var input = document.createElement('input');
+    input.type = 'email';
+    input.required = true;
+    input.value = x;
+
+   
+  if (u === "" || x === "" || y === "" || z === "") {
+    alert("Username, Email, and Password must be filled out");
+    return false;
+    window.location.href ="http://localhost:3000/";
+    
+  }
+
+ 
+  else if (input.checkValidity()) {
+    return true;
+  } else {
+    alert("Invalid email");
+    return false;
+    window.location.href ="http://localhost:3000/";
+
+  }
+  
+  return true;
+  
+  
+}
+</script>
+
+    </head>
+
+    <body>
+
+
+        <div class="hero">
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn1" onclick="Login()" style="color: black">Log In</button>
+                    <button type="button" class="toggle-btn2"onclick="Register()" style="color: black">Register</button>
+                </div>  
+
+                <form id="Login" class="input-group" name="myFormLogin" action="/login" onsubmit="validateForm1()" method="post">  
+                        <input class="input-field" type="email" id="email" name="email" placeholder="E-mail">
+                        <br>
+                        <h3 id="result"></h3>
+
+                        
+                        <input class="input-field" type="password" id="password" name="password" placeholder="passsword">
+                        <br>
+                        <h3 id="result"></h3>
+                        <input type="checkbox" class="check-box"><span>Remember Password</span>
+
+
+                        <button type="submit" class="submit-btn" style="color: black">Log in</button>
+                </form>
+
+                <form id="Register" class="input-group" name="myFormRegister" action="register" onsubmit="validateForm2()" method="post">
+                    <input class="input-field" type="text" id="username" name="username" placeholder="Username">
+                    <br>
+                    <h3 id="result"></h3>
+                    <input class="input-field" type="email" id="email" name="email" placeholder="email">
+                    <br>
+                    <h3 id="result"></h3>
+                    <input class="input-field" type="password" id="password" name="password" placeholder="passsword">
+                    <br>
+                    <h3 id="result"></h3>
+                    <input class="input-field" type="password" id="cf-password" name="cf-password" placeholder="Confirm Passsword">
+                    <br>
+                    <h3 id="result"></h3>
+                    
+                    <input type="checkbox" class="check-box"><span>I agree on the terms & conditions</span>
+                    
+
+                    <button type="submit" class="submit-btn" style="color: black" >Register</button>
+                    
+            </form>
+            </div>
+        </div>
+
+        <script>
+            var x =document.getElementById("Login");
+            var y =document.getElementById("Register");
+            var z =document.getElementById("btn")
+
+            function Register(){
+                x.style.left="-400px";
+                y.style.left="50px";
+                z.style.left="110px";
+            }
+            function Login(){
+                x.style.left="50px";
+                y.style.left="450px";
+                z.style.left="0px";
+            }
+        </script>
+
+
+    </body>
+    
+
+
+<style>
+                    
+                *{
+                    margin: 0;
+                    padding: 0;
+                    font-family:sans-serif;
+
+                }
+                .hero{
+                    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) ,url(/bg.jpg);
+                    height: 100%;
+                    width: 100%;
+                    background-size: cover;
+                    position: absolute;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+
+                .form-box{
+                    width: 380px;
+                    height: 480px;
+                    position: relative;
+                    margin: 6% auto;
+                    background: #E1EBEE ;
+                    padding: 5px;
+                    overflow: hidden;
+                    opacity: 0.9;
+                    bottom: -10%;
+                }
+                .button-box{
+                    width: 220px;
+                    margin: 35px auto;
+                    position: relative;
+                    box-shadow: 0 0 20px 9px  #ff61241f;
+                    border-radius: 30px;
+
+                }
+
+                .toggle-btn1 {
+                    padding:10px 30px;
+                    cursor: pointer;
+                    background:transparent;
+                    border:0;
+                    outline: none;
+                    position: relative;
+                }
+                .toggle-btn2 {
+                    padding:10px 10px;
+                    cursor: pointer;
+                    background:transparent;
+                    border:0;
+                    outline: none;
+                    position: relative;
+                }
+                #btn{
+                    top:0;
+                    left:0;
+                    position:absolute;
+                    width: 110px;
+                    height: 100%;
+                    background: linear-gradient(to right , #ff105f , #ffad06);
+                    border-radius: 30px;
+                    transition: .5s;
+                }
+
+                .input-group{
+                    top: 180px;
+                    position:absolute;
+                    width: 280px;
+                    transition: .5s;
+                }
+                .input-field{
+                    width: 100%;
+                    padding: 10px 0;
+                    margin: 5px 0;
+                    border-left:0;
+                    border-top:0;
+                    border-right:0;
+                    border-bottom:1px solid #999;
+                    outline: none;
+                    background: transparent;
+
+                }
+                .submit-btn{
+                    width:85%;
+                    padding: 10px 30px;
+                    cursor: pointer;
+                    display: block;
+                    margin: auto;
+                    background: linear-gradient(to right , #ff105f , #ffad06);
+                    border:0;
+                    outline: none;
+                    border-radius: 30px;
+                }
+
+                .check-box{
+                    margin: 30px 10px 30px 0;
+
+                }
+                span{
+                    color: #777;
+                    font-size: 12px;
+                    position: absolute;
+                    bottom: 68px;
+                }
+
+                #Login{
+                    left: 50px;
+                    top: 25%;
+                }
+
+                #Register{
+                    left: 450px;
+                    top: 24%;
+                }
+
+
+</style>
+
+</html>
